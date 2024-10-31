@@ -109,6 +109,14 @@
     .next-question-btn:hover {
       background-color: #218838;
     }
+
+    /* Estilo do contador de visitas */
+    .visit-counter {
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      color: #555;
+      text-align: center;
+    }
   </style>
 </head>
 <body>
@@ -127,6 +135,7 @@
       </div>
       <button id="next-question" class="next-question-btn" onclick="nextQuestion()">Próxima Questão</button>
       <div class="final-score" id="final-score" style="display: none;"></div>
+      <div class="visit-counter" id="visit-counter"></div>
     </div>
   </main>
 
@@ -230,6 +239,23 @@
 
     // Carrega a primeira questão
     loadQuestion();
+
+    // Contador de visitas
+    function updateVisitCounter() {
+      const visitCounterElement = document.getElementById("visit-counter");
+      let visits = localStorage.getItem("visitCount");
+
+      if (visits) {
+        visits = parseInt(visits) + 1;
+      } else {
+        visits = 1;
+      }
+
+      localStorage.setItem("visitCount", visits);
+      visitCounterElement.textContent = `Este site foi visitado ${visits} vezes.`;
+    }
+
+    updateVisitCounter();
   </script>
 
 </body>
